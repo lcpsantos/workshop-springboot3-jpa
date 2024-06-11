@@ -20,7 +20,7 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client") //lazy por padrão quando é oneToMany
     private List<Order> orders = new ArrayList<>(); //criando a relação entre User e Order
 
     public User() {
