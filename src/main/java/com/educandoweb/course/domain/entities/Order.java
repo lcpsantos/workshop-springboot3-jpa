@@ -1,6 +1,6 @@
-package com.educandoweb.course.entities;
+package com.educandoweb.course.domain.entities;
 
-import com.educandoweb.course.entities.enums.OrderStatus;
+import com.educandoweb.course.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,6 +15,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Instant moment;
 
     private Integer orderStatus;
@@ -22,9 +23,6 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
-
-    public Order() {
-    }
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         super();
