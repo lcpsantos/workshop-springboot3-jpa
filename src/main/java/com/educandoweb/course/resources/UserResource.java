@@ -20,12 +20,14 @@ public class UserResource {
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
         var list = service.findAll();
+
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         var user = service.findById(id);
+
         return ResponseEntity.ok().body(user);
     }
 
@@ -34,6 +36,14 @@ public class UserResource {
         var insertUser = service.insert(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}") //essa linha é para retornar o código 201 e a URI do novo recurso criado no cabeçalho da resposta
                 .buildAndExpand(insertUser.getId()).toUri();
+
         return ResponseEntity.created(uri).body(insertUser);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
